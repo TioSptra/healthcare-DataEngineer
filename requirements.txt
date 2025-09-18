@@ -1,0 +1,9 @@
+apache-airflow-providers-celery
+apache-airflow-providers-docker
+apache-airflow-providers-postgres
+dbt-bigquery
+dbt-core
+google-cloud-bigquery
+python-dotenv
+requests
+kaggle

@@ -1,0 +1,15 @@
+name : 'finpro'
+version : '1.10.7'
+profile : 'finpro'
+
+models:
+  finpro:
+    staging:
+      +schema: jcdeol005_finalproject_Tio_staging
+      +materialized: table
+    model:
+      +schema: jcdeol005_finalproject_Tio_model
+      +materialized: table
+    marts:
+      +schema: jcdeol005_finalproject_Tio_marts
+      +materialized: table

@@ -1,0 +1,9 @@
+logs/
+tmp/
+config/
+dbt/target/
+__pycache__/
+test/
+target/
+keys/
+.user.yml

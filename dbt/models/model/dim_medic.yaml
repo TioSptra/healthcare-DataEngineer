@@ -1,0 +1,22 @@
+version: 2
+
+models:
+    - name: dim_medic
+      description: "Dimensi berisi daftar pasien unik dengan atribut dasar"
+      columns:
+      - name: patient_name
+        description: "Nama pasien"
+        tests:
+          - not_null
+      - name: room_number
+        description: "Nomor kamar pasien"
+        tests:
+          - not_null
+      - name: admission_date
+        description: "Tanggal masuk pasien"
+      - name: discharge_date
+        description: "Tanggal keluar pasien"
+      - name: medication
+        description: "Obat yang diberikan"
+        tests:
+          - not_null

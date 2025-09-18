@@ -1,0 +1,27 @@
+version: 2
+
+models:
+    - name: dim_patient
+      description: "Dimensi berisi daftar pasien unik dengan atribut dasar"
+      columns:
+      - name: patient_name
+        description: "Nama pasien"
+        tests:
+          - not_null
+      - name: age
+        description: "Usia pasien"
+        tests:
+          - not_null
+      - name: gender
+        description: "Jenis kelamin pasien"
+        tests:
+          - accepted_values:
+              values: ['male', 'female']
+      - name: blood_type
+        description: "Golongan darah pasien"
+        tests:
+          - not_null
+      - name: medical_condition
+        description: "Kondisi medis pasien"
+        tests:
+          - not_null

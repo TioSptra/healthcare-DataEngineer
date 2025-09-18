@@ -1,0 +1,11 @@
+finpro:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: purwadika
+      dataset: jcdeol005_finalproject_Tio_staging
+      threads: 1
+      keyfile: /opt/airflow/keys/credentials.json
+      location: asia-southeast2   

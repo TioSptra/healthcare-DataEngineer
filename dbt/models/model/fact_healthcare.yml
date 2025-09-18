@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: fact_healthcare
+    description: "Fakta utama yang menghubungkan pasien, dokter, rumah sakit, dan informasi perawatan"
+    columns:
+      - name: patient_name
+        description: "Nama pasien (foreign key ke dim_patient)"
+        tests:
+          - not_null
+      - name: admission_type
+        description: "Jenis rawat inap"
+        tests:
+          - accepted_values:
+              values: ['elective', 'urgent','emergency','routine']
+      - name: doctor
+        description: "Dokter yang menangani pasien (foreign key ke dim_doctor)"
+        tests:
+          - not_null
+      - name: insurance_provider
+        description: "Nama penyedia asuransi"
+        tests:
+          - accepted_values:
+              values: ['aetna', 'cigna','blue cross','medicare','unitedhealthcare']
+      - name: billing_amount
+        description: "Jumlah tagihan (dalam mata uang terkait)"
+      - name: admission_date
+        description: "Tanggal pasien masuk rumah sakit"
+      - name: discharge_date
+        description: "Tanggal pasien keluar rumah sakit"
+      - name: test_results
+        description: "Hasil pemeriksaan medis"
+        tests:
+          - accepted_values:
+              values: ['normal', 'inconclusive','abnormal']
