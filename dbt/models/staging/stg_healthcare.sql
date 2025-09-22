@@ -1,34 +1,26 @@
 {{ config(
     materialized='table',
     partition_by={
-    "field": "date_of_admission",
+    "field": "admission_date",
     "data_type": "date",
     "granularity": "year"
     }
 ) }}
 
 SELECT DISTINCT
-    CASE 
-        WHEN LOWER(Gender) = 'male' 
-            THEN CONCAT('mr. ', TRIM(REPLACE(LOWER(Name), 'dr.', '')))
-        WHEN LOWER(Gender) = 'female' 
-            THEN CONCAT('mrs. ', TRIM(REPLACE(LOWER(Name), 'dr.', '')))
-        ELSE SAFE_CAST(NAME AS STRING)
-    END AS patient_name,
-
-    SAFE_CAST(Age AS INTEGER) AS age,
-    LOWER(Gender) AS gender,
-    `Blood Type` AS blood_type,
-    LOWER(`Medical Condition`) AS medical_condition,
-    SAFE_CAST(`Date Of Admission` AS DATE) AS date_of_admission,
-    CONCAT('dr. ', LOWER(Doctor)) AS doctor,
-    LOWER(Hospital) AS hospital,
-    LOWER(`Insurance Provider`) AS insurance_provider,
-    SAFE_CAST(`Billing Amount` AS FLOAT64) AS billing_amount,
-    SAFE_CAST(`Room Number` AS INTEGER) AS room_number,
-    LOWER(`Admission Type`) AS admission_type,
-    SAFE_CAST(`Discharge Date` AS DATE) AS discharge_date,
-    LOWER(Medication) AS medication,
-    LOWER(`Test Results`) AS test_results,
-    SAFE_CAST(`Length of stay` AS INTEGER) AS length_of_stay
+    SAFE_CAST(patient_id AS STRING) AS patient_id,
+    SAFE_CAST(age AS INTEGER) AS age,
+    LOWER(SAFE_CAST(gender AS STRING)) AS gender,
+    LOWER(SAFE_CAST(blood_type AS STRING)) AS blood_type,
+    LOWER(SAFE_CAST(diagnosa AS STRING)) AS diagnosa,
+    LOWER(SAFE_CAST(doctor AS STRING)) AS doctor,
+    LOWER(SAFE_CAST(room AS STRING)) AS room,
+    SAFE_CAST(admission_date AS DATE) AS admission_date,
+    SAFE_CAST(discharge_date AS DATE) AS discharge_date,
+    SAFE_CAST(length_of_stay AS INTEGER) AS length_of_stay,
+    LOWER(SAFE_CAST(admission_type AS STRING)) AS admission_type,   
+    LOWER(SAFE_CAST(insurance_provider AS STRING)) AS insurance_provider,
+    SAFE_CAST(amount AS FLOAT64) AS amount,
+    LOWER(SAFE_CAST(outcome AS STRING)) AS outcome,
+    SAFE_CAST(rating AS INTEGER) AS rating_service
 FROM `purwadika.jcdeol005_finalproject_Tio_raw.raw_healthcare`

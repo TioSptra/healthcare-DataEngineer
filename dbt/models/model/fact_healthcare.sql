@@ -7,17 +7,22 @@
     }
 ) }}
 
-SELECT DISTINCT
-    p.patient_name,
-    r.admission_type,
-    st.doctor,
-    st.insurance_provider,
-    st.billing_amount,
-    st.date_of_admission as admission_date,
-    st.discharge_date,
-    st.test_results
-FROM {{ ref('stg_healthcare') }} st
-LEFT JOIN{{ ref('dim_patient') }} p 
-    ON st.patient_name = p.patient_name
-LEFT JOIN{{ ref('dim_medic') }} r 
-    ON st.admission_type = r.admission_type
+SELECT
+    p.patient_id,
+    sh.admission_type,
+    sh.admission_date,
+    sh.discharge_date,
+    sh.length_of_stay,
+    m.diagnosa,
+    m.doctor,
+    i.insurance_provider,
+    sh.amount AS billing_amount,
+    sh.outcome,
+    sh.rating_service
+FROM {{ ref('stg_healthcare') }} sh
+LEFT JOIN {{ ref('dim_patient') }} p
+    ON sh.patient_id = p.patient_id
+LEFT JOIN {{ ref('dim_insurance') }} i
+    ON sh.insurance_provider = i.insurance_provider
+LEFT JOIN {{ ref('dim_medic') }} m
+    ON sh.doctor = m.doctor

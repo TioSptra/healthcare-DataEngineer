@@ -6,4 +6,4 @@ dbt-core
 google-cloud-bigquery
 python-dotenv
 requests
-kaggle
+faker

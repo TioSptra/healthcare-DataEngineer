@@ -4,14 +4,20 @@ models:
     - name: dim_patient
       description: "Dimensi berisi daftar pasien unik dengan atribut dasar"
       columns:
-      - name: patient_name
-        description: "Nama pasien"
+      - name: patient_id
+        description: "ID unik pasien"
         tests:
           - not_null
+          - unique
       - name: age
         description: "Usia pasien"
         tests:
           - not_null
+      - name: age_group
+        description: "Kelompok usia pasien"
+        tests:
+          - accepted_values:
+              values: ['toddler','child', 'teenager', 'adult', 'elderly']
       - name: gender
         description: "Jenis kelamin pasien"
         tests:
@@ -20,8 +26,5 @@ models:
       - name: blood_type
         description: "Golongan darah pasien"
         tests:
-          - not_null
-      - name: medical_condition
-        description: "Kondisi medis pasien"
-        tests:
-          - not_null
+          - accepted_values:
+              values: ["a", "b", "ab", "o"]

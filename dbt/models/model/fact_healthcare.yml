@@ -2,34 +2,37 @@ version: 2
 
 models:
   - name: fact_healthcare
-    description: "Fakta utama yang menghubungkan pasien, dokter, rumah sakit, dan informasi perawatan"
+    description: "Fakta utama, mencatat semua kejadian admission pasien."
     columns:
-      - name: patient_name
-        description: "Nama pasien (foreign key ke dim_patient)"
-        tests:
-          - not_null
+      - name: patient_id
+        description: "Referensi ke dim_patient"
       - name: admission_type
-        description: "Jenis rawat inap"
+        description: "Tipe admission pasien"
         tests:
           - accepted_values:
-              values: ['elective', 'urgent','emergency','routine']
-      - name: doctor
-        description: "Dokter yang menangani pasien (foreign key ke dim_doctor)"
-        tests:
-          - not_null
-      - name: insurance_provider
-        description: "Nama penyedia asuransi"
-        tests:
-          - accepted_values:
-              values: ['aetna', 'cigna','blue cross','medicare','unitedhealthcare']
-      - name: billing_amount
-        description: "Jumlah tagihan (dalam mata uang terkait)"
+              values: ['emergency', 'urgent', 'elective']
       - name: admission_date
         description: "Tanggal pasien masuk rumah sakit"
       - name: discharge_date
         description: "Tanggal pasien keluar rumah sakit"
-      - name: test_results
-        description: "Hasil pemeriksaan medis"
+      - name: length_of_stay
+        description: "Lama rawat inap (hari)"
+      - name: billing_amount
+        description: "Total tagihan pasien"
+      - name: outcome
+        description: "Hasil perawatan pasien"
         tests:
           - accepted_values:
-              values: ['normal', 'inconclusive','abnormal']
+              values: ["recovered", "referred", "deceased"]
+      - name: rating_service
+        description: "Rating kualitas layanan (1-5)"
+        tests:
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+              quote: false
+      - name: doctor
+        description: "Referensi ke dim_medic"
+      - name: room
+        description: "Referensi ke dim_medic"
+      - name: insurance_provider
+        description: "Referensi ke dim_insurance"

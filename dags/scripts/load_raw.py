@@ -12,7 +12,7 @@ log = logging.getLogger()
 
 def load_dataRaw():
     log.info("Configuration to google cloud-bigquery...")
-    key_path = os.path.join("keys","credentials.json")
+    key_path = os.path.join("/opt/airflow/keys","credentials.json")
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
     project_id = "purwadika"  
     dataset_id = "jcdeol005_finalproject_Tio_raw"  
@@ -31,7 +31,7 @@ def load_dataRaw():
 
     log.info(f"Loading csv to {dataset_id}.{table_id}' ")
     try:
-        file = os.path.join('tmp','modified_healthcare_dataset.csv')
+        file = os.path.join('/opt/airflow/tmp','healthcare_data.csv')
         with open(file,'rb') as source_file:
             load_job = client.load_table_from_file(source_file, table_ref, job_config=job_config)
         load_job.result() 

@@ -1,22 +1,21 @@
 version: 2
 
 models:
-    - name: dim_medic
-      description: "Dimensi berisi daftar pasien unik dengan atribut dasar"
-      columns:
-      - name: patient_name
-        description: "Nama pasien"
+  - name: dim_medic
+    description: "Dimensi tenaga medis dan fasilitas rumah sakit"
+    columns:
+      - name: doctor
+        description: "Nama dokter"
         tests:
-          - not_null
-      - name: room_number
-        description: "Nomor kamar pasien"
+          - accepted_values:
+              values: ["dr. citra", "dr. zhafar", "dr. dhika", "dr. jane"]
+      - name: room
+        description: "Jenis ruangan pasien"
         tests:
-          - not_null
-      - name: admission_date
-        description: "Tanggal masuk pasien"
-      - name: discharge_date
-        description: "Tanggal keluar pasien"
-      - name: medication
-        description: "Obat yang diberikan"
+          - accepted_values:
+              values: ["icu", "emergency room", "general ward", "vip room"]
+      - name: diagnosa
+        description: "Diagnosis penyakit pasien"
         tests:
-          - not_null
+          - accepted_values:
+              values: ["diabetes", "stroke", "asthma", "dengue fever", "heart disease", "cancer"]

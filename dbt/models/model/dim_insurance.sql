@@ -1,8 +1,5 @@
 {{ config(materialized='table') }}
 
 SELECT DISTINCT
-    doctor,
-    room,
-    diagnosa
+    insurance_provider
 FROM {{ ref('stg_healthcare') }}
-

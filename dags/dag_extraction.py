@@ -1,6 +1,5 @@
 from datetime import datetime
 from airflow import DAG
-from airflow.utils.task_group import TaskGroup
 from airflow.models.baseoperator import chain
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.bash import BashOperator
@@ -21,13 +20,6 @@ with DAG(
     
     start = EmptyOperator(task_id="start")
 
-    download = BashOperator(
-    task_id= "Download_dataset",
-    bash_command="python /opt/airflow/dags/scripts/download.py",
-    on_failure_callback=discord_notification,
-    on_success_callback=discord_notification 
-    )
-
     create = BashOperator(
         task_id= "create_dataset_bigquery",
         bash_command="python /opt/airflow/dags/scripts/create_raw.py",
@@ -37,7 +29,7 @@ with DAG(
 
     load = BashOperator(
         task_id= "load_bigquery",
-        bash_command="python /opt/airflow/dags/scripts/load_raw.py --year 2024",
+        bash_command="python /opt/airflow/dags/scripts/load_raw.py",
         on_failure_callback=discord_notification,
         on_success_callback=discord_notification 
     )
@@ -55,12 +47,12 @@ with DAG(
         bash_command = 'sleep 30'
     )
 
-    # trigger = TriggerDagRunOperator(
-    #     task_id="trigger_transformation_dag",
-    #     trigger_dag_id="jcdeol005_finpro_transformation",
-    #     wait_for_completion=False,
-    #     on_failure_callback=discord_notification,
-    #     on_success_callback=discord_notification 
-    # )
+    trigger = TriggerDagRunOperator(
+        task_id="trigger_transformation_dag",
+        trigger_dag_id="jcdeol005_finpro_transformation",
+        wait_for_completion=False,
+        on_failure_callback=discord_notification,
+        on_success_callback=discord_notification 
+    )
 
-    chain(start,download, create, load,remove, delay)
+    chain(start, create, load,remove, delay, trigger)
