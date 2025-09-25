@@ -1,9 +1,9 @@
 {{ config(
     materialized='table',
     partition_by={
-    "field": "admission_date",
-    "data_type": "date",
-    "granularity": "year"
+        "field": "admission_date",
+        "data_type": "date",
+        "granularity": "year"
     }
 ) }}
 

@@ -3,7 +3,7 @@
     partition_by={
         "field": "admission_date",
         "data_type": "date",
-        "granularity": "month"
+        "granularity": "year"
     }
 ) }}
 
