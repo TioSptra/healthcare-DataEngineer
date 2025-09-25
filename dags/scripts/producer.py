@@ -48,7 +48,7 @@ with open(csv_path, "a", newline="") as f:
             "doctor", "room", "length_of_stay", "admission_type","discharge_date",
             "amount", "insurance_provider", "outcome", "rating"
         ])
-        
+
     start_time = time.time()
     duration = 5 * 60  
 

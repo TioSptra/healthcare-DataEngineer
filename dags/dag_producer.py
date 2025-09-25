@@ -22,7 +22,6 @@ with DAG(
     producer = BashOperator(
         task_id='producer',
         bash_command='python /opt/airflow/dags/scripts/producer.py',
-        execution_timeout=timedelta(minutes=5), 
         on_failure_callback=discord_notification,
         on_success_callback=discord_notification
     )
