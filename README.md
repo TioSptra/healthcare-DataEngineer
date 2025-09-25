@@ -1,4 +1,3 @@
-# CMS-Beneficiary2024-pipeline
 > Industri kesehatan menghasilkan data yang sangat besar dan beragam, mulai dari informasi pasien, dokter, rumah sakit, hingga catatan pengobatan. Sayangnya, data ini sering tersimpan dalam bentuk mentah yang terpisah-pisah, tidak konsisten, dan sulit diolah untuk analisis.
 untuk mengatasi masalah tersebut diperlunya membangun sebuah sistem data yang terintergarasi dalam data warehouse berbasis star schema untuk kebutuhan monitoring, serta mengembangkan dashboard  sebagai sarana decision making.
 
@@ -16,7 +15,7 @@ Arsitektur sistem menggunakan:
 Flow:
 `producer.py → RAW → STAGING → MODEL → Validasi data → MART → Tableu`
 
-## Data Model (Star Chema) Beneficiary 2024
+## Data Model (Star Chema) Healthcare
 ![relasi](images/ERD.png)
 
 Struktur Star Schema pada Data Warehouse:
@@ -33,12 +32,14 @@ Struktur Star Schema pada Data Warehouse:
 
 ## Dags Design
 > menggunakan airflow sebagai orchestration pada proyek ini. disini ada 3 dags yang berfungsi antara lain:
-### Data Integration --Python
+
+### Dag Producer --python
 ![producer](images/producer.png)
 - berfungsi untuk menghasilkan data dummy atau simulasi data pasien secara terus-menerus.
 - Data tersebut ditulis ke healthcare_data.csv yang di simpan ke dalam folder tmp.
 - Setelah proses producer selesai, Airflow secara otomatis menjalankan DAG Data Transformation untuk memproses data lebih lanjut.
 
+### Dag Extraction --python
 ![extrcat](images/extract.png)
 - Membuat dataset baru di Google BigQuery menggunakan credentials.json melalui script Python.
 - Mengunggah data mentah (raw data) dari healthcare_data.csv ke tabel BigQuery.
@@ -54,24 +55,24 @@ Struktur Star Schema pada Data Warehouse:
 
 
 ## Dashboard
-terdapat 3 analisa yang bisa di lihat pada dashboard di bawah ini.
+> terdapat 3 analisa yang bisa di lihat pada dashboard di bawah ini.
 
-*Overall Patient*:
+### Overall Patient
 ![patient](images/patient.png)
-- Pasien elective mendominasi dengan tren meningkat hingga 240 pasien di 2024.
-- Total pasien stabil di kisaran 550–600 per tahun, sempat turun drastis di 2022.
-- Rating layanan tertinggi terjadi pada 2023 (1.355).
-- Outcome pasien menunjukkan peningkatan pasien sembuh (546 → 808), meski angka kematian masih tinggi di kisaran 700-an.
+- `Pasien elective` mendominasi dengan tren meningkat hingga 240 pasien di 2024.
+- `Total pasien` stabil di kisaran 550–600 per tahun, sempat turun drastis di 2022.
+- `Rating layanan tertinggi` terjadi pada 2023 (1.355).
+- `Outcome pasien` menunjukkan peningkatan pasien sembuh (546 → 808), meski angka kematian masih tinggi di kisaran 700-an.
 
-*Doctor Performance*:
+### Doctor Performance
 ![doctor](images/performance.png)
-- Rata-rata rating dokter berfluktuasi, dengan dr. Citra dan dr. Jane memiliki performa cukup stabil.
-- dr. Zhafar menunjukkan peningkatan signifikan di 2025 (69.16).
-- Outcome pasien terbagi cukup seimbang: 35.8% dirujuk, 33.3% sembuh, dan 30.8% meninggal.
+- `Rata-rata rating dokter` berfluktuasi, dengan dr. Citra dan dr. Jane memiliki performa cukup stabil.
+- `dr. Zhafar` menunjukkan peningkatan signifikan di 2025 (69.16).
+- `Outcome pasien` terbagi cukup seimbang: 35.8% dirujuk, 33.3% sembuh, dan 30.8% meninggal.
 
-*Patient Payment*:
+### Patient Payment
 ![paymment](images/pay.png)
-- Jumlah pasien stabil, dengan peningkatan di 2024 (606 pasien).
+- `Jumlah tren rovider`, insurance mengalami penurunan 2 tahaun awal dan kenaikan pada tahun 2023 .
 - Distribusi provider insurance cukup merata: BPJS (34.5%), - Insurance (33.1%), dan Self-pay (32.2%).
 - Dari sisi total payment, Insurance memberikan kontribusi tertinggi (950 juta), diikuti BPJS (924 juta), lalu Self-pay (850 juta).
 
