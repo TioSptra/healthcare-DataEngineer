@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from scripts.notification import discord_notification
-from datetime import datetime,timedelta
+from datetime import datetime
 
 default_args = {
     'owner': 'airflow',

@@ -27,7 +27,6 @@ Struktur Star Schema pada Data Warehouse:
 - *Dimension Tables*:
     - `dim_patient`: Berisi informasi pasien seperti usia, gender, dan golongan darah.
     - `dim_doctor`: Berisi informasi medis, mencakup nama dokter, diagnosa, dan ruangan.
-    - `dim_insurance`: Berisi informasi mengenai penyedia asuransi yang digunakan pasien.
 
 
 ## Dags Design
@@ -58,9 +57,10 @@ Struktur Star Schema pada Data Warehouse:
 > terdapat 3 analisa yang bisa di lihat pada dashboard di bawah ini.
 
 ### Overall Patient
+
 ![patient](images/patient.png)
 - `Pasien elective` mendominasi dengan tren meningkat hingga 240 pasien di 2024.
-- `Total pasien` stabil di kisaran 550–600 per tahun, sempat turun drastis di 2022.
+- `Total pasien` stabil di kisaran 2.200 per tahun, sempat turun drastis di 2022.
 - `Rating layanan tertinggi` terjadi pada 2023 (1.355).
 - `Outcome pasien` menunjukkan peningkatan pasien sembuh (546 → 808), meski angka kematian masih tinggi di kisaran 700-an.
 

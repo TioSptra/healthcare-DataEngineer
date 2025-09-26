@@ -36,7 +36,7 @@ with DAG(
 
     remove = BashOperator(
         task_id='rm-csv',
-        bash_command='rm /opt/airflow/tmp/healthcare_dataset.csv',
+        bash_command='rm /opt/airflow/tmp/healthcare_data.csv',
         on_failure_callback=discord_notification,
         on_success_callback=discord_notification 
     )
@@ -49,10 +49,10 @@ with DAG(
 
     trigger = TriggerDagRunOperator(
         task_id="trigger_transformation_dag",
-        trigger_dag_id="jcdeol005_finpro_transformation",
+        trigger_dag_id="jcdeol005_finalproject_transformation",
         wait_for_completion=False,
         on_failure_callback=discord_notification,
         on_success_callback=discord_notification 
     )
 
-    chain(start, create, load,remove, delay, trigger)
+    chain(start, create, load, remove, delay, trigger)
