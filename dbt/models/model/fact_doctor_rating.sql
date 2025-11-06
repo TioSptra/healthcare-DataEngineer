@@ -13,9 +13,9 @@ SELECT
     doctor,
     outcome,
         CASE
-    WHEN outcome = 'recovered' THEN 10
-    WHEN outcome = 'referred' THEN 5
-    WHEN outcome = 'deceased' THEN 0
+    WHEN outcome = 'recovered' THEN 5
+    WHEN outcome = 'referred' THEN 3
+    WHEN outcome = 'deceased' THEN 1
     ELSE NULL
     END AS doctor_rating
 FROM {{ ref('stg_healthcare') }} 

@@ -1,5 +1,4 @@
-> Industri kesehatan menghasilkan data yang sangat besar dan beragam, mulai dari informasi pasien, dokter, rumah sakit, hingga catatan pengobatan. Sayangnya, data ini sering tersimpan dalam bentuk mentah yang terpisah-pisah, tidak konsisten, dan sulit diolah untuk analisis.
-untuk mengatasi masalah tersebut diperlunya membangun sebuah sistem data yang terintergarasi dalam data warehouse berbasis star schema untuk kebutuhan monitoring, serta mengembangkan dashboard  sebagai sarana decision making.
+> Industri kesehatan menghasilkan data yang sangat besar dan beragam, mulai dari informasi pasien, dokter, rumah sakit, hingga catatan pengobatan. Sayangnya, data ini sering tersimpan dalam bentuk mentah yang terpisah-pisah, tidak konsisten, dan sulit diolah untuk analisis. untuk mengatasi masalah tersebut diperlunya membangun sebuah sistem data yang terintergarasi dalam data warehouse berbasis star schema untuk kebutuhan monitoring, serta mengembangkan dashboard  sebagai sarana decision making.
 
 ## End-to-End Data Architecture
 ![arsitektur](images/arsitektur_finpro.png)
@@ -52,29 +51,11 @@ Struktur Star Schema pada Data Warehouse:
 - Melakukan data testing menggunakan DBT untuk memastikan kualitas data sesuai kriteria.
 - Data Mart Membuat data mart siap pakai untuk analisis dan visualisasi.
 
-
 ## Dashboard
-> terdapat 3 analisa yang bisa di lihat pada dashboard di bawah ini.
-
-### Overall Patient
-
-![patient](images/patient.png)
-- `Pasien elective` mendominasi dengan tren meningkat hingga 240 pasien di 2024.
-- `Total pasien` stabil di kisaran 2.200 per tahun, sempat turun drastis di 2022.
-- `Rating layanan tertinggi` terjadi pada 2023 (1.355).
-- `Outcome pasien` menunjukkan peningkatan pasien sembuh (546 → 808), meski angka kematian masih tinggi di kisaran 700-an.
-
-### Doctor Performance
-![doctor](images/performance.png)
-- `Rata-rata rating dokter` berfluktuasi, dengan dr. Citra dan dr. Jane memiliki performa cukup stabil.
-- `dr. Zhafar` menunjukkan peningkatan signifikan di 2025 (69.16).
-- `Outcome pasien` terbagi cukup seimbang: 35.8% dirujuk, 33.3% sembuh, dan 30.8% meninggal.
-
-### Patient Payment
-![paymment](images/pay.png)
-- `Jumlah tren rovider`, insurance mengalami penurunan 2 tahaun awal dan kenaikan pada tahun 2023 .
-- Distribusi provider insurance cukup merata: BPJS (34.5%), - Insurance (33.1%), dan Self-pay (32.2%).
-- Dari sisi total payment, Insurance memberikan kontribusi tertinggi (950 juta), diikuti BPJS (924 juta), lalu Self-pay (850 juta).
-
-## Insight Utama:
-Dari data rumah sakit dari 3 dashboard dia atas. Rumah sakit berhasil menjaga stabilitas jumlah pasien dan meningkatkan outcome kesembuhan. Dari sisi finansial, kontribusi pembayaran cukup merata antar provider, sehingga risiko pendanaan tidak hanya bertumpu pada satu sumber
+> terdapat 3 analitik yang bisa di lihat pada dashboard di bawah ini.
+- Overall patients Dashboard
+![patient](images/healtchare.png)
+- Doctor Performance Dashboard
+![doctor](images/doctor.png)
+- Patient Payments Dashboard
+![paymment](images/payment.png)

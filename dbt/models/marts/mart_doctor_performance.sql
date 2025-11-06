@@ -1,11 +1,12 @@
 {{ config(materialized='table') }}
 
 SELECT
-    EXTRACT(YEAR FROM admission_date) as year,
-    EXTRACT(MONTH FROM admission_date) as month,
+    EXTRACT(YEAR FROM admission_date) AS year,
+    EXTRACT(MONTH FROM admission_date) AS month,
     doctor,
-    ROUND(AVG(doctor_rating), 2) AS avg_doctor_rating,
-    COUNT(patient_id) AS total_cases
-FROM {{ ref('fact_doctor_rating') }} 
-GROUP BY year, month, doctor
-ORDER BY year, month, doctor
+    outcome,
+    COUNT(*) AS total_cases,
+    SUM(doctor_rating) AS total_rating,
+FROM {{ ref('fact_doctor_rating') }}
+GROUP BY year, month, doctor, outcome
+ORDER BY year, month, doctor, outcome
